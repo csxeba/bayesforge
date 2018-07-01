@@ -55,3 +55,6 @@ class Bayesify(Wrapper):
 
     def compute_output_shape(self, input_shape):
         return self.layer.compute_output_shape(input_shape)
+
+    def __getattr__(self, item):
+        return self.layer.__getattr__(item)
