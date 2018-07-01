@@ -5,7 +5,6 @@ from keras.layers import Dense, Input
 from keras.datasets import mnist
 
 from bayesify import Bayesify
-from bdense import BayesianDense
 
 (lX, lY), (tX, tY) = mnist.load_data()
 lX, tX = lX / 255., tX / 255.
