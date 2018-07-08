@@ -34,7 +34,7 @@ class Bayesify(Wrapper):
             self.layer.build(input_shape)
             self.layer.built = True
         self.mean = self.layer.trainable_weights[:]
-        for tensor in self.layer.trainable_weights:
+        for tensor in self.layer.get_weights():
             self.variation.append(self.add_weight(
                 name="variation",
                 shape=tensor.shape,
@@ -52,9 +52,6 @@ class Bayesify(Wrapper):
         for tensor, param in zip(self.layer.trainable_weights, sample):
             K.update(tensor, param)
         return self.layer.call(inputs, **kwargs)
-
-    def compute_output_shape(self, input_shape):
-        return self.layer.compute_output_shape(input_shape)
 
     def __getattr__(self, item):
         return self.layer.__getattr__(item)
